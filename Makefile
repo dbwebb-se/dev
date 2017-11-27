@@ -1,7 +1,7 @@
 #!/usr/bin/env make
 #
 # To develop for dbwebb.se, clone, pull & push all repos within a single
-# directory structure, aided by this Makefile.
+# directory structure, aided by this Makefile. One repo to rule them all.
 #
 
 # ------------------------------------------------------------------------
@@ -39,7 +39,7 @@ HELPTEXT = $(ECHO) "$(ACTION)--->" `egrep "^\# target: $(1) " $(THIS_MAKEFILE) |
 CHECK_VERSION = printf "%-15s %-10s %s\n" "`basename $(1)`" "`$(1) --version $(2)`" "`which $(1)`"
 
 # Print out colored action message
-ACTION_MESSAGE = $(ECHO) "$(ACTION)--->$(1)$(NO_COLOR)"
+ACTION_MESSAGE = $(ECHO) "$(ACTION)---> $(1)$(NO_COLOR)"
 
 
 
