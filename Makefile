@@ -64,7 +64,7 @@ NODEMODBIN := node_modules/.bin
 
 ORG := git@github.com:dbwebb-se
 
-REPOS := dev website dbwebb-cli lab
+REPOS := website dbwebb-cli lab
 
 COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb
 
