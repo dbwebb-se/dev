@@ -64,6 +64,8 @@ NODEMODBIN := node_modules/.bin
 
 ORG := git@github.com:dbwebb-se
 
+REPOS := website dbwebb-cli lab
+
 COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb
 
 
@@ -80,21 +82,21 @@ COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux o
 # 
 # target: clone              - Clone all repos
 .PHONY:  clone
-clone: clone-courses
+clone: clone-repos clone-courses
 	@$(call HELPTEXT,$@)
 
 
 
 # target: pull               - Pull latest from all repos
 .PHONY:  pull
-pull: pull-courses
+pull: pull-repos pull-courses
 	@$(call HELPTEXT,$@)
 
 
 
 # target: status             - Check status on all repos
 .PHONY:  status
-status: status-courses
+status: status-repos status-courses
 	@$(call HELPTEXT,$@)
 
 
@@ -134,7 +136,7 @@ clean-cache:
 
 # target: clean-all          - Removes generated files and directories.
 .PHONY:  clean-all
-clean-all: clean clean-cache clean-courses
+clean-all: clean clean-cache clean-repos clean-courses
 	@$(call HELPTEXT,$@)
 	#rm -rf .bin vendor node_modules
 
@@ -182,6 +184,70 @@ clean-all: clean clean-cache clean-courses
 
 # ------------------------------------------------------------------------
 #
+# Top level repos
+#
+
+# target: clone-repos        - Clone all general repos.
+.PHONY: clone-repos
+clone-repos:
+	@$(call HELPTEXT,$@)
+	@cd repos;                              \
+	for repo in $(REPOS) ; do               \
+		$(call ACTION_MESSAGE,$$repo);      \
+		[ -d $$repo ]                       \
+			&& $(ECHO) "Repo already there, skipping cloning it." \
+			&& continue;                    \
+		git clone $(ORG)/$$repo.git;        \
+	done
+
+
+
+# target: pull-repos         - Pull latest for all general repos.
+.PHONY: pull-repos
+pull-repos:
+	@$(call HELPTEXT,$@)
+	@cd repos;                              \
+	for repo in $(REPOS) ; do               \
+		$(call ACTION_MESSAGE,$$repo);      \
+		(cd $$repo && git pull);            \
+	done
+
+
+
+# target: clean-repos        - Remove all top general repos.
+.PHONY: clean-repos
+clean-repos:
+	@$(call HELPTEXT,$@)
+	cd repos && rm -rf $(REPOS)
+
+
+
+# target: status-repos       - Check status of each general repo.
+.PHONY: status-repos
+status-repos:
+	@$(call HELPTEXT,$@)
+	@cd repos;                                   \
+	for repo in $(REPOS) ; do                    \
+		$(call ACTION_MESSAGE,$$repo);           \
+		(cd $$repo && git status);               \
+	done
+
+
+
+# target: check-repos        - Check details of each general repo.
+.PHONY: check-repos
+check-repos:
+	@$(call HELPTEXT,$@)
+	@cd repos;                                      \
+	for repo in $(REPOS) ; do                       \
+		$(call ACTION_MESSAGE,$$repo);              \
+		du -sk $$repo/.git;                         \
+	done
+
+
+
+# ------------------------------------------------------------------------
+#
 # Courses
 #
 
@@ -190,12 +256,12 @@ clean-all: clean clean-cache clean-courses
 clone-courses:
 	@$(call HELPTEXT,$@)
 	@cd kurser;                             \
-	for course in $(COURSES) ; do           \
-		$(call ACTION_MESSAGE,$$course);    \
-		[ -d $$course ]                     \
+	for repo in $(COURSES) ; do             \
+		$(call ACTION_MESSAGE,$$repo);      \
+		[ -d $$repo ]                       \
 			&& $(ECHO) "Repo already there, skipping cloning it." \
 			&& continue;                    \
-		git clone $(ORG)/$$course.git;      \
+		git clone $(ORG)/$$repo.git;        \
 	done
 
 
@@ -205,9 +271,9 @@ clone-courses:
 pull-courses:
 	@$(call HELPTEXT,$@)
 	@cd kurser;                             \
-	for course in $(COURSES) ; do           \
-		$(call ACTION_MESSAGE,$$course);    \
-		git pull;                           \
+	for repo in $(COURSES) ; do             \
+		$(call ACTION_MESSAGE,$$repo);      \
+		(cd $$repo && git pull);            \
 	done
 
 
@@ -224,10 +290,10 @@ clean-courses:
 .PHONY: status-courses
 status-courses:
 	@$(call HELPTEXT,$@)
-	@cd kurser;                                       \
-	for course in $(COURSES) ; do                     \
-		$(call ACTION_MESSAGE,$$course);              \
-		(cd $$course && git status);                  \
+	@cd kurser;                                     \
+	for repo in $(COURSES) ; do                     \
+		$(call ACTION_MESSAGE,$$repo);              \
+		(cd $$repo && git status);                  \
 	done
 
 
@@ -236,10 +302,10 @@ status-courses:
 .PHONY: check-courses
 check-courses:
 	@$(call HELPTEXT,$@)
-	@cd kurser;                                       \
-	for course in $(COURSES) ; do                     \
-		$(call ACTION_MESSAGE,$$course);              \
-		du -sk $$course/.git;                         \
+	@cd kurser;                                     \
+	for repo in $(COURSES) ; do                     \
+		$(call ACTION_MESSAGE,$$repo);              \
+		du -sk $$repo/.git;                         \
 	done
 
 
