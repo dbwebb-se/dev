@@ -1,8 +1,10 @@
 #!/usr/bin/env make
 #
 # To develop for dbwebb.se, clone, pull & push all repos within a single
-# directory structure, aided by this Makefile. One repo to rule them all.
-#
+# directory structure, aided by this Makefile.
+# One repo to rule them all.
+# See organisation on GitHub: https://github.com/dbwebb-se
+
 
 # ------------------------------------------------------------------------
 #
@@ -64,7 +66,7 @@ NODEMODBIN := node_modules/.bin
 
 ORG := git@github.com:dbwebb-se
 
-REPOS := website dbwebb-cli lab
+REPOS := website dbwebb-cli lab slides
 
 COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb
 
@@ -91,6 +93,7 @@ clone: clone-repos clone-courses
 .PHONY:  pull
 pull: pull-repos pull-courses
 	@$(call HELPTEXT,$@)
+	git pull
 
 
 
@@ -98,6 +101,7 @@ pull: pull-repos pull-courses
 .PHONY:  status
 status: status-repos status-courses
 	@$(call HELPTEXT,$@)
+	git status
 
 
 
