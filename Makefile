@@ -38,6 +38,9 @@ HELPTEXT = $(ECHO) "$(ACTION)--->" `egrep "^\# target: $(1) " $(THIS_MAKEFILE) |
 # Check version  and path to command and display on one line
 CHECK_VERSION = printf "%-15s %-10s %s\n" "`basename $(1)`" "`$(1) --version $(2)`" "`which $(1)`"
 
+# Print out colored action message
+ACTION_MESSAGE = $(ECHO) "$(ACTION)--->$(1)$(NO_COLOR)"
+
 
 
 # target: help               - Displays help.
@@ -59,7 +62,7 @@ help:
 BIN        := .bin
 NODEMODBIN := node_modules/.bin
 
-ORG := https://github.com/dbwebb-se
+ORG := git@github.com:dbwebb-se
 
 COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb
 
@@ -85,6 +88,13 @@ clone: clone-courses
 # target: pull               - Pull latest from all repos
 .PHONY:  pull
 pull: pull-courses
+	@$(call HELPTEXT,$@)
+
+
+
+# target: status             - Check status on all repos
+.PHONY:  status
+status: status-courses
 	@$(call HELPTEXT,$@)
 
 
@@ -179,12 +189,13 @@ clean-all: clean clean-cache clean-courses
 .PHONY: clone-courses
 clone-courses:
 	@$(call HELPTEXT,$@)
-	cd kurser;                          \
-	for course in $(COURSES) ; do       \
-		[ -d $$course ]                 \
-			&& $(ECHO) "Repo $$course already there, skipping cloning it." \
-			&& continue;                \
-		git clone $(ORG)/$$course.git;  \
+	@cd kurser;                             \
+	for course in $(COURSES) ; do           \
+		$(call ACTION_MESSAGE,$$course);    \
+		[ -d $$course ]                     \
+			&& $(ECHO) "Repo already there, skipping cloning it." \
+			&& continue;                    \
+		git clone $(ORG)/$$course.git;      \
 	done
 
 
@@ -193,9 +204,10 @@ clone-courses:
 .PHONY: pull-courses
 pull-courses:
 	@$(call HELPTEXT,$@)
-	cd kurser;                      \
-	for course in $(COURSES) ; do   \
-		git pull;                   \
+	@cd kurser;                             \
+	for course in $(COURSES) ; do           \
+		$(call ACTION_MESSAGE,$$course);    \
+		git pull;                           \
 	done
 
 
@@ -208,13 +220,26 @@ clean-courses:
 
 
 
+# target: status-courses     - Check status of each course repo.
+.PHONY: status-courses
+status-courses:
+	@$(call HELPTEXT,$@)
+	@cd kurser;                                       \
+	for course in $(COURSES) ; do                     \
+		$(call ACTION_MESSAGE,$$course);              \
+		(cd $$course && git status);                  \
+	done
+
+
+
 # target: check-courses      - Check details of each course repo.
 .PHONY: check-courses
 check-courses:
 	@$(call HELPTEXT,$@)
-	cd kurser;                      \
-	for course in $(COURSES) ; do   \
-		du -sk $$course/.git;       \
+	@cd kurser;                                       \
+	for course in $(COURSES) ; do                     \
+		$(call ACTION_MESSAGE,$$course);              \
+		du -sk $$course/.git;                         \
 	done
 
 
