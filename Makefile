@@ -49,7 +49,7 @@ ACTION_MESSAGE = $(ECHO) "$(ACTION)---> $(1)$(NO_COLOR)"
 .PHONY:  help
 help:
 	@$(call HELPTEXT,$@)
-	@sed '/^$$/Q' $(THIS_MAKEFILE) | tail +3 | sed 's/#\s*//g'
+	@sed '/^$$/q' $(THIS_MAKEFILE) | tail +3 | sed 's/#\s*//g'
 	@$(ECHO) "Usage:"
 	@$(ECHO) " make [target] ..."
 	@$(ECHO) "target:"
