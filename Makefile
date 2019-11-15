@@ -70,6 +70,8 @@ REPOS := website dbwebb-cli lab slides docker ctf # sstatic
 
 COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb matmod databas webgl webapp itsec 
 
+WEB_ORG := git@github.com:Webbprogrammering
+WEB := websoft
 
 
 # # target: prepare            - Prepare for tests and build
@@ -84,14 +86,14 @@ COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux o
 # 
 # target: clone              - Clone all repos
 .PHONY:  clone
-clone: clone-repos clone-courses
+clone: clone-repos clone-courses clone-web
 	@$(call HELPTEXT,$@)
 
 
 
 # target: pull               - Pull latest from all repos
 .PHONY:  pull
-pull: pull-repos pull-courses
+pull: pull-repos pull-courses pull-web
 	@$(call HELPTEXT,$@)
 	git pull
 
@@ -99,7 +101,7 @@ pull: pull-repos pull-courses
 
 # target: status             - Check status on all repos
 .PHONY:  status
-status: status-repos status-courses
+status: status-repos status-courses status-web
 	@$(call HELPTEXT,$@)
 	git status
 
@@ -134,55 +136,76 @@ clean:
 .PHONY:  clean-cache
 clean-cache:
 	@$(call HELPTEXT,$@)
-	#rm -rf cache/*/*
-
-
 
 # target: clean-all          - Removes generated files and directories.
 .PHONY:  clean-all
-clean-all: clean clean-cache clean-repos clean-courses
+clean-all: clean clean-cache clean-repos clean-courses clean-web
 	@$(call HELPTEXT,$@)
 	#rm -rf .bin vendor node_modules
 
 
 
-# # target: check              - Check version of installed tools.
-# .PHONY:  check
-# check: check-tools-js #check-tools-bash check-tools-php
-# 	@$(call HELPTEXT,$@)
-# 
-# 
-# 
-# # target: test               - Run all tests.
-# .PHONY: test
-# test: htmlhint stylelint eslint jsunittest
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -f composer.json ] || composer validate
-# 
-# 
-# 
-# # target: doc                - Generate documentation.
-# .PHONY: doc
-# doc: 
-# 	@$(call HELPTEXT,$@)
-# 
-# 
-# 
-# # target: build              - Do all build
-# .PHONY: build
-# build: test doc #theme less-compile less-minify js-minify
-# 	@$(call HELPTEXT,$@)
-# 
-# 
-# 
-# # target: tag-prepare        - Prepare to tag new version.
-# .PHONY: tag-prepare
-# tag-prepare:
-# 	@$(call HELPTEXT,$@)
-# 	@grep '^v[0-9]\.' REVISION.md | head -1
-# 	@grep version package.json
-# 	@git describe --abbrev=0
-# 	@git status
+# ------------------------------------------------------------------------
+#
+# Top level repos
+#
+
+# target: clone-web        - Clone all general web.
+.PHONY: clone-web
+clone-web:
+	@$(call HELPTEXT,$@)
+	@cd web;                              \
+	for repo in $(WEB) ; do               \
+		$(call ACTION_MESSAGE,$$repo);      \
+		[ -d $$repo ]                       \
+			&& $(ECHO) "Repo already there, skipping cloning it." \
+			&& continue;                    \
+		git clone $(WEB_ORG)/$$repo.git;        \
+	done
+
+
+
+# target: pull-web         - Pull latest for all general web.
+.PHONY: pull-web
+pull-web:
+	@$(call HELPTEXT,$@)
+	@cd web;                              \
+	for repo in $(WEB) ; do               \
+		$(call ACTION_MESSAGE,$$repo);      \
+		(cd $$repo && git pull);            \
+	done
+
+
+
+# target: clean-web        - Remove all top general web.
+.PHONY: clean-web
+clean-web:
+	@$(call HELPTEXT,$@)
+	cd web && rm -rf $(WEB)
+
+
+
+# target: status-web       - Check status of each general web repo.
+.PHONY: status-web
+status-web:
+	@$(call HELPTEXT,$@)
+	@cd web;                                   \
+	for repo in $(WEB) ; do                    \
+		$(call ACTION_MESSAGE,$$repo);           \
+		(cd $$repo && git status);               \
+	done
+
+
+
+# target: check-web        - Check details of each general repo.
+.PHONY: check-web
+check-web:
+	@$(call HELPTEXT,$@)
+	@cd web;                                      \
+	for repo in $(WEB) ; do                       \
+		$(call ACTION_MESSAGE,$$repo);              \
+		du -sk $$repo/.git;                         \
+	done
 
 
 
@@ -311,98 +334,3 @@ check-courses:
 		$(call ACTION_MESSAGE,$$repo);              \
 		du -sk $$repo/.git;                         \
 	done
-
-
-
-# # target: install-tools-js   - Install JS development tools.
-# .PHONY: install-tools-js
-# install-tools-js:
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -f package.json ] || npm install
-# 
-# 
-# 
-# # target: check-tools-js     - Check versions of JS tools.
-# .PHONY: check-tools-js
-# check-tools-js:
-# 	@$(call HELPTEXT,$@)
-# 	@$(call CHECK_VERSION, node)
-# 	@$(call CHECK_VERSION, npm)
-# 	@$(call CHECK_VERSION, $(HTMLHINT))
-# 	@$(call CHECK_VERSION, $(STYLELINT))
-# 	@$(call CHECK_VERSION, $(ESLINT))
-# 	@$(call CHECK_VERSION, $(JSONLINT))
-# 	@$(call CHECK_VERSION, $(JSYAML))
-# 	@$(call CHECK_VERSION, $(HTMLMINI))
-# 	@$(call CHECK_VERSION, $(CLEANCSS))
-# 	@$(call CHECK_VERSION, $(UGLIFYJS), | cut -d ' ' -f 2)
-# 	@$(call CHECK_VERSION, $(MOCHA))
-# 	@$(call CHECK_VERSION, $(NYC))
-# 	@#@$(call CHECK_VERSION, $(COVERALLS))
-# 	@#@$(call CHECK_VERSION, $(CODECOV))
-# 
-# 
-# 
-# # target: htmlhint           - HTMLhint linter.
-# .PHONY: htmlhint
-# htmlhint:
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -f .htmlhintrc ] || $(HTMLHINT) --ignore build/**,node_modules/** | grep -v "Config loaded:"
-# 
-# 
-# 
-# # target: stylelint          - Stylelint (alternative csslint).
-# .PHONY: stylelint
-# stylelint:
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -f .stylelintrc.json ] || $(STYLELINT) **/*.css
-# 
-# 
-# 
-# # target: stylelint-fix      - Stylelint fixer.
-# .PHONY: stylelint-fix
-# stylelint-fix:
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -f .stylelintrc.json ] || $(STYLELINT) **/*.css --fix
-# 
-# 
-# 
-# # target: eslint             - JavaScript linter.
-# .PHONY: eslint
-# eslint:
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -f .eslintrc.json ] || $(ESLINT) .
-# 
-# 
-# 
-# # target: eslint-fix         - JavaScript linter fixer.
-# .PHONY: eslint-fix
-# eslint-fix:
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -f .eslintrc.json ] || $(ESLINT) --fix .
-# 
-# 
-# 
-# # target: jsunittest         - JavaScript unit tests.
-# .PHONY: jsunittest
-# jsunittest:
-# 	@$(call HELPTEXT,$@)
-# ifneq ($(wildcard .nycrc),)
-# 	[ ! -d test ] || $(NYC) $(MOCHA) --reporter dot 'test/**/*.js'
-# else
-# 	[ ! -d test ] || $(MOCHA) --reporter dot 'test/**/*.js'
-# endif 
-# 
-# 
-# 
-# 
-# # ------------------------------------------------------------------------
-# #
-# # Theme
-# #
-# # target: theme              - Do make build install in theme/ if available.
-# .PHONY: theme
-# theme:
-# 	@$(call HELPTEXT,$@)
-# 	[ ! -d theme ] || $(MAKE) --directory=theme build install
-# 	#[ ! -d theme ] || ( cd theme && make build install )
