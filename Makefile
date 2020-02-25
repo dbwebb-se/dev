@@ -73,6 +73,10 @@ COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux o
 WEB_ORG := git@github.com:Webbprogrammering
 WEB := websoft websoft.wiki
 
+GITLABMOS_ORG := git@gitlab.com:mosbth
+GITLABMOS := pedagogic-portfolio
+
+
 
 # # target: prepare            - Prepare for tests and build
 # .PHONY:  prepare
@@ -86,14 +90,14 @@ WEB := websoft websoft.wiki
 # 
 # target: clone              - Clone all repos
 .PHONY:  clone
-clone: clone-repos clone-courses clone-web
+clone: clone-repos clone-courses clone-web clone-gitlabmos
 	@$(call HELPTEXT,$@)
 
 
 
 # target: pull               - Pull latest from all repos
 .PHONY:  pull
-pull: pull-repos pull-courses pull-web
+pull: pull-repos pull-courses pull-web pull-gitlabmos
 	@$(call HELPTEXT,$@)
 	git pull
 
@@ -101,7 +105,7 @@ pull: pull-repos pull-courses pull-web
 
 # target: status             - Check status on all repos
 .PHONY:  status
-status: status-repos status-courses status-web
+status: status-repos status-courses status-web status-gitlabmos
 	@$(call HELPTEXT,$@)
 	git status
 
@@ -139,7 +143,7 @@ clean-cache:
 
 # target: clean-all          - Removes generated files and directories.
 .PHONY:  clean-all
-clean-all: clean clean-cache clean-repos clean-courses clean-web
+clean-all: clean clean-cache clean-repos clean-courses clean-web clean-gitlabmos
 	@$(call HELPTEXT,$@)
 	#rm -rf .bin vendor node_modules
 
@@ -203,6 +207,70 @@ check-web:
 	@$(call HELPTEXT,$@)
 	@cd web;                                      \
 	for repo in $(WEB) ; do                       \
+		$(call ACTION_MESSAGE,$$repo);              \
+		du -sk $$repo/.git;                         \
+	done
+
+
+
+# ------------------------------------------------------------------------
+#
+# Top level repos
+#
+
+# target: clone-gitlabmos        - Clone all general web.
+.PHONY: clone-gitlabmos
+clone-gitlabmos:
+	@$(call HELPTEXT,$@)
+	@cd gitlabmos;                              \
+	for repo in $(GITLABMOS) ; do               \
+		$(call ACTION_MESSAGE,$$repo);      \
+		[ -d $$repo ]                       \
+			&& $(ECHO) "Repo already there, skipping cloning it." \
+			&& continue;                    \
+		git clone $(GITLABMOS_ORG)/$$repo.git;        \
+	done
+
+
+
+# target: pull-gitlabmos         - Pull latest for all general web.
+.PHONY: pull-gitlabmos
+pull-gitlabmos:
+	@$(call HELPTEXT,$@)
+	@cd gitlabmos;                              \
+	for repo in $(GITLABMOS) ; do               \
+		$(call ACTION_MESSAGE,$$repo);      \
+		(cd $$repo && git pull);            \
+	done
+
+
+
+# target: clean-gitlabmos        - Remove all top general web.
+.PHONY: clean-gitlabmos
+clean-gitlabmos:
+	@$(call HELPTEXT,$@)
+	cd gitlabmos && rm -rf $(GITLABMOS)
+
+
+
+# target: status-gitlabmos       - Check status of each general web repo.
+.PHONY: status-gitlabmos
+status-gitlabmos:
+	@$(call HELPTEXT,$@)
+	@cd gitlabmos;                                   \
+	for repo in $(GITLABMOS) ; do                    \
+		$(call ACTION_MESSAGE,$$repo);           \
+		(cd $$repo && git status);               \
+	done
+
+
+
+# target: check-gitlabmos        - Check details of each general repo.
+.PHONY: check-gitlabmos
+check-gitlabmos:
+	@$(call HELPTEXT,$@)
+	@cd gitlabmos;                                      \
+	for repo in $(GITLABMOS) ; do                       \
 		$(call ACTION_MESSAGE,$$repo);              \
 		du -sk $$repo/.git;                         \
 	done
