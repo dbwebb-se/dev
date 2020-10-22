@@ -66,9 +66,9 @@ NODEMODBIN := node_modules/.bin
 
 ORG := git@github.com:dbwebb-se
 
-REPOS := website dbwebb-cli lab slides docker ctf inspect-gui # sstatic
+REPOS := website dbwebb-cli lab slides docker ctf ctf-website inspect-gui # sstatic
 
-COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb matmod databas webgl webapp itsec 
+COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb matmod databas webgl webapp itsec vlinux
 
 WEB_ORG := git@github.com:Webbprogrammering
 WEB := websoft websoft.wiki
@@ -85,9 +85,9 @@ GITLABMOS := pedagogic-portfolio
 # 	[ -d .bin ] || mkdir .bin
 # 	[ -d build ] || mkdir build
 # 	rm -rf build/*
-# 
-# 
-# 
+#
+#
+#
 # target: clone              - Clone all repos
 .PHONY:  clone
 clone: clone-repos clone-courses clone-web clone-gitlabmos
@@ -115,9 +115,9 @@ status: status-repos status-courses status-web status-gitlabmos
 # .PHONY:  install
 # install:
 # 	@$(call HELPTEXT,$@)
-# 
-# 
-# 
+#
+#
+#
 # target: update             - Update the repos and essentials.
 .PHONY:  update
 update:
