@@ -66,9 +66,9 @@ NODEMODBIN := node_modules/.bin
 
 ORG := git@github.com:dbwebb-se
 
-REPOS := website dbwebb-cli lab slides docker ctf ctf-website inspect-gui # sstatic
+REPOS := website website-11ty dbwebb-cli lab slides tomato docker ctf ctf-website inspect-gui # sstatic
 
-COURSES := python htmlphp javascript1 design linux oopython databas dbjs linux oophp ramverk1 ramverk2 exjobb matmod databas webgl webapp itsec vlinux design-v3 webtec mvc pattern
+COURSES := python htmlphp javascript1 design linux oopython databas databas-v2  dbjs linux oophp ramverk1 ramverk2 exjobb matmod databas webgl webapp itsec vlinux design-v3 webtec mvc pattern owasp courserepo-v2
 
 WEB_ORG := git@github.com:Webbprogrammering
 WEB := websoft websoft.wiki
