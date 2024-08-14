@@ -68,7 +68,7 @@ ORG := git@github.com:dbwebb-se
 
 REPOS := website website-11ty dbwebb-cli lab slides tomato docker ctf ctf-website inspect-gui # sstatic
 
-COURSES := python htmlphp js-v2 javascript1 design linux oopython databas databas-v2  dbjs linux oophp ramverk1 ramverk2 exjobb matmod databas webgl webapp itsec vlinux design-v3 webtec mvc pattern owasp courserepo-v2
+COURSES := python htmlphp js-v2 javascript1 design linux oopython databas databas-v2  dbjs linux oophp ramverk1 ramverk2 exjobb matmod databas webgl webapp itsec vlinux design-v3 webtec mvc pattern owasp courserepo-v2 webtec2
 
 WEB_ORG := git@github.com:Webbprogrammering
 WEB := websoft websoft.wiki
