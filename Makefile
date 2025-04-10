@@ -78,6 +78,8 @@ GITLABMOS := pedagogic-portfolio
 
 
 
+
+
 # # target: prepare            - Prepare for tests and build
 # .PHONY:  prepare
 # prepare:
@@ -90,14 +92,14 @@ GITLABMOS := pedagogic-portfolio
 #
 # target: clone              - Clone all repos
 .PHONY:  clone
-clone: clone-repos clone-courses clone-web clone-gitlabmos
+clone: clone-repos clone-courses clone-web clone-gitlabmos clone-2025
 	@$(call HELPTEXT,$@)
 
 
 
 # target: pull               - Pull latest from all repos
 .PHONY:  pull
-pull: pull-repos pull-courses pull-web pull-gitlabmos
+pull: pull-repos pull-courses pull-web pull-gitlabmos pull-2025
 	@$(call HELPTEXT,$@)
 	git pull
 
@@ -401,4 +403,41 @@ check-courses:
 	for repo in $(COURSES) ; do                     \
 		$(call ACTION_MESSAGE,$$repo);              \
 		du -sk $$repo/.git;                         \
+	done
+
+
+
+# ------------------------------------------------------------------------
+#
+# 2025
+#
+
+#20205_BASE := git@github.com
+#2025 := 
+
+
+git@github.com:webtec-2024/website.git
+
+# target: clone-2025          - Clone all 2025 repos
+.PHONY:  clone-2025
+clone-2025:
+	@$(call HELPTEXT,$@)
+
+	@dir="2025/webtec/website"; \
+	repo="git@github.com:webtec-2024/website.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+# target: pull-2025           - Pull latest from all2025 repos
+.PHONY: pull-2025
+pull-2025:
+	@$(call HELPTEXT,$@)
+	@cd 2025;                            \
+	for repo in `ls` ; do                \
+		$(call ACTION_MESSAGE,$$repo);   \
+		cd $$repo; git pull; cd ..;      \
+	done
+
+	for repo in `ls *` ; do                \
+		$(call ACTION_MESSAGE,$$repo);   \
+		cd $$repo; git pull; cd ..;      \
 	done
