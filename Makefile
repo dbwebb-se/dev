@@ -415,9 +415,6 @@ check-courses:
 #20205_BASE := git@github.com
 #2025 := 
 
-
-git@github.com:webtec-2024/website.git
-
 # target: clone-2025          - Clone all 2025 repos
 .PHONY:  clone-2025
 clone-2025:
@@ -425,6 +422,10 @@ clone-2025:
 
 	@dir="2025/webtec/website"; \
 	repo="git@github.com:webtec-2024/website.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/repo/website"; \
+	repo="git@github.com:dbwebb-se/dbwebb.bth.se.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
 # target: pull-2025           - Pull latest from all2025 repos
