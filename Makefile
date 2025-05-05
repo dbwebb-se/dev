@@ -424,6 +424,14 @@ clone-2025:
 	repo="git@github.com:webtec-2024/website.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+	@dir="2025/webtec/teacher"; \
+	repo="git@github.com:webtec-2024/teacher.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/webtec/student"; \
+	repo="git@github.com:webtec-2024/student.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 	@dir="2025/repo/website"; \
 	repo="git@github.com:dbwebb-se/dbwebb.bth.se.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
