@@ -430,16 +430,16 @@ clone-2025:
 	[ -d $$dir ] || git clone $$repo $$dir;
 
 # Demo organisation
-	@dir="2025/webtec/website"; \
-	repo="git@github.com:webtec-2024/website_.git"; \
+	@dir="2025/webtec/website_"; \
+	repo="git@github.com:webtec-2024/website.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
-	@dir="2025/webtec/teacher"; \
-	repo="git@github.com:webtec-2024/teacher_.git"; \
+	@dir="2025/webtec/teacher_"; \
+	repo="git@github.com:webtec-2024/teacher.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
-	@dir="2025/webtec/student"; \
-	repo="git@github.com:webtec-2024/student_.git"; \
+	@dir="2025/webtec/student_"; \
+	repo="git@github.com:webtec-2024/student.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
 # New dbwebbse website
