@@ -420,6 +420,12 @@ check-courses:
 clone-2025:
 	@$(call HELPTEXT,$@)
 
+# Kursen webtec organisation
+	@dir="2025/webtec/owner"; \
+	repo="git@github.com:bth-webtec/owner.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+# Demo organisation
 	@dir="2025/webtec/website"; \
 	repo="git@github.com:webtec-2024/website.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
@@ -432,6 +438,7 @@ clone-2025:
 	repo="git@github.com:webtec-2024/student.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+# New dbwebbse website
 	@dir="2025/repo/website"; \
 	repo="git@github.com:dbwebb-se/dbwebb.bth.se.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
