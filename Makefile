@@ -433,6 +433,15 @@ clone-2025:
 	repo="git@github.com:bth-webtec/website.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+# webtec mosstud
+	@dir="2025/webtec/mosstud/webtec-mosstud/"; \
+	repo="git@github.com:bth-webtec/webtec-mosstud.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/webtec/mosstud/webtec-abcd25/"; \
+	repo="git@github.com:bth-webtec/webtec-abcd25.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 # Demo organisation
 	@dir="2025/webtec/teacher_"; \
 	repo="git@github.com:webtec-2024/teacher.git"; \
@@ -442,7 +451,7 @@ clone-2025:
 	repo="git@github.com:webtec-2024/student.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
-# New dbwebbse website
+# New dbwebb.se website
 	@dir="2025/repo/website"; \
 	repo="git@github.com:dbwebb-se/dbwebb.bth.se.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
