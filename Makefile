@@ -437,6 +437,10 @@ clone-2025:
 	repo="git@github.com:bth-webtec/website.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+	@dir="2025/webtec/dbwebb-webtec"; \
+	repo="git@github.com:bth-webtec/dbwebb-webtec.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 # webtec mosstud
 	@dir="2025/webtec/mosstud/webtec-mosstud/"; \
 	repo="git@github.com:bth-webtec/webtec-mosstud.git"; \
