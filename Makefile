@@ -420,6 +420,11 @@ check-courses:
 clone-2025:
 	@$(call HELPTEXT,$@)
 
+# Kursen databas organisation
+	@dir="2025/databas/owner"; \
+	repo="git@github.com:bth-databas/owner.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 # Kursen webtec organisation
 	@dir="2025/webtec/owner"; \
 	repo="git@github.com:bth-webtec/owner.git"; \
