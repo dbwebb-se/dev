@@ -425,6 +425,10 @@ clone-2025:
 	repo="git@github.com:bth-databas/owner.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+	@dir="2025/databas/website"; \
+	repo="git@github.com:bth-databas/website.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 # Kursen webtec organisation
 	@dir="2025/webtec/owner"; \
 	repo="git@github.com:bth-webtec/owner.git"; \
