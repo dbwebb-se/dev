@@ -508,13 +508,8 @@ clone-2025:
 	repo="git@github.com:bth-databas/template-student.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
-# databas mosstud
-	@dir="2025/databas/mosstud/databas-mosstud/"; \
+	@dir="2025/databas/databas-mosstud"; \
 	repo="git@github.com:bth-databas/databas-mosstud.git"; \
-	[ -d $$dir ] || git clone $$repo $$dir;
-
-	@dir="2025/databas/mosstud/databas-abcd26/"; \
-	repo="git@github.com:bth-databas/databas-abcd26.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
 # Kursen webtec organisation
