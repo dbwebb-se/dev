@@ -420,6 +420,48 @@ check-courses:
 clone-2025:
 	@$(call HELPTEXT,$@)
 
+# Kursen ops organisation
+	@dir="2025/ops/owner"; \
+	repo="git@github.com:bth-ops/owner.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/ops/bth-ops.github.io"; \
+	repo="git@github.com:bth-ops/bth-ops.github.io.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/ops/forum"; \
+	repo="git@github.com:bth-ops/forum.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/ops/template-student"; \
+	repo="git@github.com:bth-ops/template-student.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/ops/mosstud/ops-mosstud/"; \
+	repo="git@github.com:bth-ops/ops-mosstud.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+# Kursen mvc organisation
+	@dir="2025/mvc/owner"; \
+	repo="git@github.com:bth-mvc/owner.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/mvc/bth-mvc.github.io"; \
+	repo="git@github.com:bth-mvc/bth-mvc.github.io.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/mvc/forum"; \
+	repo="git@github.com:bth-mvc/forum.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/mvc/template-student"; \
+	repo="git@github.com:bth-mvc/template-student.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/mvc/mosstud/mvc-mosstud/"; \
+	repo="git@github.com:bth-mvc/mvc-mosstud.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 # Kursen databas organisation
 	@dir="2025/databas/owner"; \
 	repo="git@github.com:bth-databas/owner.git"; \
@@ -435,6 +477,15 @@ clone-2025:
 
 	@dir="2025/databas/template-student"; \
 	repo="git@github.com:bth-databas/template-student.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+# databas mosstud
+	@dir="2025/databas/mosstud/databas-mosstud/"; \
+	repo="git@github.com:bth-databas/databas-mosstud.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/databas/mosstud/databas-abcd26/"; \
+	repo="git@github.com:bth-databas/databas-abcd26.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
 # Kursen webtec organisation
