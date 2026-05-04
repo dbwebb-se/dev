@@ -420,6 +420,31 @@ check-courses:
 clone-2025:
 	@$(call HELPTEXT,$@)
 
+# Kursen node organisation
+	@dir="2025/node/owner"; \
+	repo="git@github.com:bth-node/owner.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/node/bth-node.github.io"; \
+	repo="git@github.com:bth-node/bth-node.github.io.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+# 	@dir="2025/node/forum"; \
+# 	repo="git@github.com:bth-node/forum.git"; \
+# 	[ -d $$dir ] || git clone $$repo $$dir;
+
+# 	@dir="2025/node/template-student"; \
+# 	repo="git@github.com:bth-node/template-student.git"; \
+# 	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/node/kmom04-06/"; \
+	repo="git@github.com:bth-node/kmom04-06.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
+	@dir="2025/node/mosstud/node-mosstud/"; \
+	repo="git@github.com:bth-node/node-mosstud.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 # Kursen ops organisation
 	@dir="2025/ops/owner"; \
 	repo="git@github.com:bth-ops/owner.git"; \
