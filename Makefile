@@ -475,6 +475,10 @@ clone-2025:
 	repo="git@github.com:bth-mvc/bth-mvc.github.io.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+	@dir="2025/mvc/teacher"; \
+	repo="git@github.com:bth-mvc/teacher.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 	@dir="2025/mvc/forum"; \
 	repo="git@github.com:bth-mvc/forum.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
