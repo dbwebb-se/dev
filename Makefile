@@ -522,18 +522,27 @@ clone-2025:
 	repo="git@github.com:bth-webtec/owner.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
-	@dir="2025/webtec/student"; \
-	repo="git@github.com:bth-webtec/student.git"; \
-	[ -d $$dir ] || git clone $$repo $$dir;
+# Används inte
+#	@dir="2025/webtec/student"; \
+#	repo="git@github.com:bth-webtec/student.git"; \
+#	[ -d $$dir ] || git clone $$repo $$dir;
 
+# klw använder detta repot?
 	@dir="2025/webtec/teacher"; \
 	repo="git@github.com:bth-webtec/teacher.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
-	@dir="2025/webtec/website"; \
-	repo="git@github.com:bth-webtec/website.git"; \
+# Old website used 2025
+#	@dir="2025/webtec/website"; \
+#	repo="git@github.com:bth-webtec/website.git"; \
+#	[ -d $$dir ] || git clone $$repo $$dir;
+
+# New website from 2026
+	@dir="2025/webtec/bth-webtec.github.io"; \
+	repo="git@github.com:bth-webtec/bth-webtec.github.io.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+# Rättningsscript
 	@dir="2025/webtec/dbwebb-webtec"; \
 	repo="git@github.com:bth-webtec/dbwebb-webtec.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
