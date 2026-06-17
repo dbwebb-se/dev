@@ -442,8 +442,8 @@ clone-2025:
 	repo="git@github.com:bth-node/node.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
-	@dir="2025/node/kmom04-06/"; \
-	repo="git@github.com:bth-node/kmom04-06.git"; \
+	@dir="2025/node/backend/"; \
+	repo="git@github.com:bth-node/backend.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
 	@dir="2025/node/mosstud/node-mosstud/"; \
