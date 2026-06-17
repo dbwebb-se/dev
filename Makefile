@@ -437,6 +437,11 @@ clone-2025:
 # 	repo="git@github.com:bth-node/template-student.git"; \
 # 	[ -d $$dir ] || git clone $$repo $$dir;
 
+# klw teacher repo
+	@dir="2025/node/node/"; \
+	repo="git@github.com:bth-node/node.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 	@dir="2025/node/kmom04-06/"; \
 	repo="git@github.com:bth-node/kmom04-06.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
@@ -557,13 +562,13 @@ clone-2025:
 	[ -d $$dir ] || git clone $$repo $$dir;
 
 # Demo organisation
-	@dir="2025/webtec/teacher_"; \
-	repo="git@github.com:webtec-2024/teacher.git"; \
-	[ -d $$dir ] || git clone $$repo $$dir;
+# 	@dir="2025/webtec/teacher_"; \
+# 	repo="git@github.com:webtec-2024/teacher.git"; \
+# 	[ -d $$dir ] || git clone $$repo $$dir;
 
-	@dir="2025/webtec/student_"; \
-	repo="git@github.com:webtec-2024/student.git"; \
-	[ -d $$dir ] || git clone $$repo $$dir;
+# 	@dir="2025/webtec/student_"; \
+# 	repo="git@github.com:webtec-2024/student.git"; \
+# 	[ -d $$dir ] || git clone $$repo $$dir;
 
 # New dbwebb.se website
 	@dir="2025/repo/website"; \
