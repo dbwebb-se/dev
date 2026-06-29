@@ -496,6 +496,10 @@ clone-2025:
 	repo="git@github.com:bth-mvc/exchange.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+	@dir="2025/mvc/api-server"; \
+	repo="git@github.com:bth-mvc/api-server.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 	@dir="2025/mvc/template-student"; \
 	repo="git@github.com:bth-mvc/template-student.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
