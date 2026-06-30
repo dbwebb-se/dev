@@ -459,6 +459,10 @@ clone-2025:
 	repo="git@github.com:bth-ops/teacher.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
 
+	@dir="2025/ops/microblog"; \
+	repo="git@github.com:bth-ops/microblog.git"; \
+	[ -d $$dir ] || git clone $$repo $$dir;
+
 	@dir="2025/ops/bth-ops.github.io"; \
 	repo="git@github.com:bth-ops/bth-ops.github.io.git"; \
 	[ -d $$dir ] || git clone $$repo $$dir;
